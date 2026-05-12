@@ -25,7 +25,7 @@ export default async function RecentActivity({ tenantId }: { tenantId: string })
                 <div className="space-y-2">
                     {enrollments.map((e) => (
                         <div key={e.id} className="text-sm">
-                            <strong>{e.user.name}</strong> se inscribió en la ruta{" "}
+                            <strong>{e.user.name}</strong> se inscribió en el curso{" "}
                             <span className="text-muted-foreground">
                                 {e.course.title}
                             </span>

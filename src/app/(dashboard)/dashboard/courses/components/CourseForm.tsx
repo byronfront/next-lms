@@ -44,7 +44,7 @@ export default function CourseForm() {
       })
       const data = await res.json()
       if (!res.ok) {
-        setError(data.error ?? "No se pudo crear la ruta")
+        setError(data.error ?? "No se pudo crear el curso")
         return
       }
       router.push("/dashboard/courses")
@@ -59,7 +59,7 @@ export default function CourseForm() {
       {error && <p className="text-sm text-destructive">{error}</p>}
 
       <Input
-        placeholder="Ej. Fundamentos de LLMs para desarrolladores"
+        placeholder="Ej. Primeros pasos con Excel"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         required
@@ -69,20 +69,20 @@ export default function CourseForm() {
         <label className="text-sm font-medium">Descripción</label>
         <textarea
           className="mt-1 flex min-h-[100px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm"
-          placeholder="Qué aprenderán: prompting, APIs, buenas prácticas…"
+          placeholder="De qué trata, qué van a aprender y para quién es…"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>
 
       <Input
-        placeholder="Slug opcional (ej: mi-curso)"
+        placeholder="Nombre corto en la web (opcional, ej. mi-curso)"
         value={slug}
         onChange={(e) => setSlug(e.target.value)}
       />
 
       <Input
-        placeholder="URL de miniatura (opcional)"
+        placeholder="Enlace a una imagen de portada (opcional)"
         value={thumbnail}
         onChange={(e) => setThumbnail(e.target.value)}
       />
@@ -94,7 +94,7 @@ export default function CourseForm() {
           checked={isFree}
           onChange={(e) => setIsFree(e.target.checked)}
         />
-        <label htmlFor="free">Ruta gratuita</label>
+        <label htmlFor="free">Curso gratuito</label>
       </div>
 
       {!isFree && (
@@ -115,11 +115,11 @@ export default function CourseForm() {
           checked={isPublished}
           onChange={(e) => setIsPublished(e.target.checked)}
         />
-        <label htmlFor="pub">Publicar en el catálogo (visible en Aprender IA)</label>
+        <label htmlFor="pub">Que aparezca en la lista de cursos para quienes estudian</label>
       </div>
 
       <Button type="submit" disabled={loading}>
-        {loading ? "Creando…" : "Crear ruta"}
+        {loading ? "Creando…" : "Crear curso"}
       </Button>
     </form>
   )

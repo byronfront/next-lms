@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { brand } from "@/lib/brand"
 
 export default function SignInPage() {
   const [email, setEmail] = useState("")
@@ -19,10 +20,10 @@ export default function SignInPage() {
 
           <CardHeader>
             <CardTitle className="text-2xl font-bold">
-              Bienvenido
+              Bienvenido a {brand.name}
             </CardTitle>
             <CardDescription>
-              Inicia sesión para seguir tu formación en IA para desarrollo
+              Escribe tu correo y contraseña para entrar.
             </CardDescription>
           </CardHeader>
 
@@ -89,13 +90,8 @@ export default function SignInPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-black to-zinc-950" />
 
         <div className="relative text-center px-10">
-          <h2 className="text-3xl font-bold">
-            IA en cada sprint.
-          </h2>
-          <p className="text-white/60 mt-4">
-            Rutas prácticas para que tu equipo use modelos, APIs y agentes con
-            criterio en el desarrollo de software.
-          </p>
+          <h2 className="text-3xl font-bold">Todo tu material, ordenado</h2>
+          <p className="text-white/60 mt-4">{brand.hero}</p>
         </div>
 
       </div>

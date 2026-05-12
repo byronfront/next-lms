@@ -16,7 +16,7 @@ export default async function SettingsPage() {
       <div>
         <h1 className="text-3xl font-bold">Ajustes</h1>
         <p className="text-muted-foreground">
-          Tu perfil en la plataforma de IA para desarrollo.
+          Tu perfil en la plataforma.
         </p>
       </div>
 

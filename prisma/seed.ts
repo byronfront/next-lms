@@ -11,9 +11,9 @@ const prisma = new PrismaClient({ adapter })
 async function main() {
   const tenant = await prisma.tenant.upsert({
     where: { slug: "seed-default" },
-    update: { name: "Seed Academy", plan: Plan.FREE },
+    update: { name: "Centro demo", plan: Plan.FREE },
     create: {
-      name: "Seed Academy",
+      name: "Centro demo",
       slug: "seed-default",
       plan: Plan.FREE,
     },
@@ -21,10 +21,10 @@ async function main() {
 
   const instructor = await prisma.user.upsert({
     where: { email: "seed.instructor@nextlms.dev" },
-    update: { tenantId: tenant.id, role: Role.INSTRUCTOR, isActive: true },
+    update: { tenantId: tenant.id, role: Role.INSTRUCTOR, isActive: true, name: "Instructora demo" },
     create: {
       email: "seed.instructor@nextlms.dev",
-      name: "Seed Instructor",
+      name: "Instructora demo",
       role: Role.INSTRUCTOR,
       tenantId: tenant.id,
       isActive: true,
@@ -33,10 +33,10 @@ async function main() {
 
   const student = await prisma.user.upsert({
     where: { email: "seed.student@nextlms.dev" },
-    update: { tenantId: tenant.id, role: Role.STUDENT, isActive: true },
+    update: { tenantId: tenant.id, role: Role.STUDENT, isActive: true, name: "Estudiante demo" },
     create: {
       email: "seed.student@nextlms.dev",
-      name: "Seed Student",
+      name: "Estudiante demo",
       role: Role.STUDENT,
       tenantId: tenant.id,
       isActive: true,
@@ -45,9 +45,9 @@ async function main() {
 
   const category = await prisma.category.upsert({
     where: { slug: "introduccion" },
-    update: { name: "Introduccion" },
+    update: { name: "Primeros pasos con la app" },
     create: {
-      name: "Introduccion",
+      name: "Primeros pasos con la app",
       slug: "introduccion",
     },
   })
@@ -55,15 +55,18 @@ async function main() {
   const course = await prisma.course.upsert({
     where: { tenantId_slug: { tenantId: tenant.id, slug: "curso-seed" } },
     update: {
-      title: "Curso Seed",
+      title: "Bienvenida a Next LMS",
+      description:
+        "Curso de prueba para conocer la plataforma: partes, clases y apuntarse. Cuando quieras, cámbialo por contenido real.",
       ownerId: instructor.id,
       isPublished: true,
       isFree: true,
     },
     create: {
-      title: "Curso Seed",
+      title: "Bienvenida a Next LMS",
       slug: "curso-seed",
-      description: "Curso de ejemplo creado por prisma db seed.",
+      description:
+        "Curso de prueba para conocer la plataforma: partes, clases y apuntarse. Cuando quieras, cámbialo por contenido real.",
       ownerId: instructor.id,
       tenantId: tenant.id,
       isPublished: true,
@@ -94,7 +97,7 @@ async function main() {
     },
   })
 
-  console.log("Seed completado")
+  console.log("Listo: datos de ejemplo cargados.")
 }
 
 main()

@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     return unauthorized("Se requiere organización (tenant)")
   }
   if (!assertCanManage(user)) {
-    return forbidden("No tienes permiso para crear rutas de aprendizaje")
+    return forbidden("No tienes permiso para crear cursos")
   }
 
   let json: unknown

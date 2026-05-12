@@ -11,7 +11,7 @@ export default async function CoursesTable() {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Rutas de aprendizaje</CardTitle>
+                <CardTitle>Cursos</CardTitle>
             </CardHeader>
 
             <CardContent>
@@ -19,7 +19,7 @@ export default async function CoursesTable() {
 
                     {courses.length === 0 && (
                         <p className="text-muted-foreground">
-                            Aún no hay rutas. Crea la primera sobre IA y desarrollo.
+                            Aún no hay cursos. Crea el primero para tu organización.
                         </p>
                     )}
 

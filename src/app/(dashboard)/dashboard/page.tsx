@@ -5,6 +5,7 @@ import { canManageCourses, isSuperAdmin } from "@/lib/permissions"
 import Stats from "./components/Stats"
 import RecentActivity from "./components/RecentActivity"
 import StudentDashboard from "./components/StudentDashboard"
+import { brand } from "@/lib/brand"
 
 export default async function DashboardPage() {
   const session = await auth()
@@ -21,7 +22,7 @@ export default async function DashboardPage() {
         <div>
           <h1 className="text-3xl font-bold">Panel</h1>
           <p className="text-muted-foreground">
-            Super administrador de la plataforma de IA para desarrollo.{" "}
+            Super administrador de {brand.name}.{" "}
             <Link href="/dashboard/admin/tenants" className="text-primary underline">
               Gestionar organizaciones
             </Link>
@@ -49,7 +50,7 @@ export default async function DashboardPage() {
       <div>
         <h1 className="text-3xl font-bold">Panel</h1>
         <p className="text-muted-foreground">
-          Vista general de tu academia: estudiantes, rutas de IA y actividad.
+          Vista general: estudiantes, cursos y lo último que pasó.
         </p>
       </div>
 

@@ -34,32 +34,31 @@ export default function LandingPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Rutas de aprendizaje</CardTitle>
+              <CardTitle>Tu curso, en partes claras</CardTitle>
             </CardHeader>
             <CardContent>
-              Estructura cursos en módulos y lecciones: fundamentos de LLMs,
-              prompting, uso de APIs, RAG ligero y patrones para equipos de
-              ingeniería.
+              Junta el contenido por bloques y clases: texto, vídeo o pequeñas
+              preguntas para repasar. Así quien estudia no se pierde.
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Progreso y práctica</CardTitle>
+              <CardTitle>Ver quién va avanzando</CardTitle>
             </CardHeader>
             <CardContent>
-              Sigue avances por lección, quizzes y entregables pensados para
-              reforzar habilidades de IA en el día a día del desarrollo.
+              Marca qué clases ya vio cada persona y usa preguntas cortas cuando
+              quieras comprobar que se entendió el tema.
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Para bootcamps y empresas tech</CardTitle>
+              <CardTitle>Para academias, empresas y equipos</CardTitle>
             </CardHeader>
             <CardContent>
-              Multi-organización, roles claros y escalado cuando tu comunidad
-              o tu empresa crece.
+              Varios centros o marcas en un mismo sitio, con quien enseña y quien
+              aprende bien separado. Crece sin liar las cosas.
             </CardContent>
           </Card>
 
@@ -70,7 +69,7 @@ export default function LandingPage() {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold">Planes</h2>
           <p className="text-muted-foreground mt-2">
-            Elige cómo desplegar tu academia de IA para desarrolladores
+            Elige un plan según cuánta gente vas a tener y cuántos cursos quieres subir
           </p>
         </div>
 
@@ -84,8 +83,8 @@ export default function LandingPage() {
               <p className="text-3xl font-bold">$0</p>
               <ul className="text-sm space-y-2 text-muted-foreground">
                 <li>Hasta 50 estudiantes</li>
-                <li>5 rutas o cursos</li>
-                <li>Ideal para probar contenido de IA dev</li>
+                <li>Hasta 5 cursos publicados</li>
+                <li>Ideal para probar antes de abrir al público</li>
               </ul>
 
               <Button className="w-full" asChild>
@@ -101,8 +100,8 @@ export default function LandingPage() {
             <CardContent className="space-y-4">
               <p className="text-3xl font-bold">$29/mo</p>
               <ul className="text-sm space-y-2 text-muted-foreground">
-                <li>Estudiantes y cursos sin límite práctico</li>
-                <li>Métricas de avance por cohorte</li>
+                <li>Cursos y estudiantes sin tope rígido en el día a día</li>
+                <li>Resumen de cómo va cada grupo</li>
                 <li>Soporte prioritario</li>
               </ul>
 
@@ -119,9 +118,9 @@ export default function LandingPage() {
             <CardContent className="space-y-4">
               <p className="text-3xl font-bold">A medida</p>
               <ul className="text-sm space-y-2 text-muted-foreground">
-                <li>Integraciones y SSO</li>
-                <li>Contenido y marca corporativa</li>
-                <li>Infraestructura dedicada</li>
+                <li>Conexión con otras herramientas que ya usáis</li>
+                <li>Tu logo y tu estilo en lo que ven los alumnos</li>
+                <li>Más capacidad y acompañamiento a medida</li>
               </ul>
 
               <Button variant="outline" className="w-full" asChild>
@@ -135,7 +134,7 @@ export default function LandingPage() {
 
       <section className="py-20 px-6 text-center bg-muted/40">
         <h2 className="text-3xl font-bold">
-          Impulsa la alfabetización en IA de tu equipo de desarrollo
+          Pon tus cursos en internet con {brand.name}
         </h2>
 
         <div className="mt-6">

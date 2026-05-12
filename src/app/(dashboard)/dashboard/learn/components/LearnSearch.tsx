@@ -26,7 +26,7 @@ export default function LearnSearch({ initialQuery }: { initialQuery: string }) 
   return (
     <div className="flex w-full max-w-md gap-2">
       <Input
-        placeholder="Buscar rutas (ej. prompting, RAG)…"
+        placeholder="Buscar por nombre del curso…"
         value={q}
         onChange={(e) => setQ(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && apply()}

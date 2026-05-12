@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { SignUpForm } from "../components/signup-form"
+import { brand } from "@/lib/brand"
 
 export default function SignUpPage() {
   return (
@@ -18,7 +19,7 @@ export default function SignUpPage() {
               Crear cuenta
             </CardTitle>
             <CardDescription>
-              Crea tu cuenta y accede a contenido sobre IA aplicada al desarrollo
+              Crea tu cuenta para entrar a los cursos de tu centro o equipo en {brand.name}.
             </CardDescription>
           </CardHeader>
 
@@ -60,13 +61,8 @@ export default function SignUpPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-black to-zinc-950" />
 
         <div className="relative text-center px-10">
-          <h2 className="text-3xl font-bold">
-            De la teoría al IDE
-          </h2>
-          <p className="text-white/60 mt-4">
-            Bootcamps y empresas tech usan rutas estructuradas para enseñar IA
-            donde importa: en el código y en el flujo de trabajo.
-          </p>
+          <h2 className="text-3xl font-bold">Enseña sin complicarte</h2>
+          <p className="text-white/60 mt-4">{brand.tagline}</p>
         </div>
 
       </div>

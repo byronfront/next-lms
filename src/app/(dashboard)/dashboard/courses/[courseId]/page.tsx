@@ -38,7 +38,7 @@ export default async function CourseDetailPage({
       <div>
         <h1 className="text-3xl font-bold">{course.title}</h1>
         <p className="text-muted-foreground">
-          Organiza módulos y lecciones de esta ruta (IA, prácticas, quizzes)
+          Organiza las partes y las clases de este curso: texto, vídeo o preguntas cortas.
         </p>
         {course.description && (
           <p className="mt-2 text-sm max-w-2xl">{course.description}</p>

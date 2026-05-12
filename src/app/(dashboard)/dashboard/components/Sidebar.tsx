@@ -50,7 +50,7 @@ export function Sidebar() {
           className={navClass(pathname.startsWith("/dashboard/learn"))}
         >
           <GraduationCap size={18} />
-          Aprender IA
+          {brand.navCatalog}
         </Link>
 
         {manage && (

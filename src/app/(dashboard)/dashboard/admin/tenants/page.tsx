@@ -25,7 +25,7 @@ export default async function AdminTenantsPage() {
       <div>
         <h1 className="text-3xl font-bold">Organizaciones (tenants)</h1>
         <p className="text-muted-foreground">
-          Academias y equipos que imparten formación en IA para desarrollo.
+          Organizaciones que usan la plataforma para impartir cursos.
         </p>
       </div>
 
@@ -47,7 +47,7 @@ export default async function AdminTenantsPage() {
                   </p>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  {t._count.users} usuarios · {t._count.courses} rutas
+                  {t._count.users} usuarios · {t._count.courses} cursos
                 </p>
               </li>
             ))}

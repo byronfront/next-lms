@@ -4,6 +4,7 @@ import { getPublishedCourses } from "@/lib/data/learn"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import LearnSearch from "./components/LearnSearch"
+import { brand } from "@/lib/brand"
 
 export default async function LearnCatalogPage({
   searchParams,
@@ -19,9 +20,10 @@ export default async function LearnCatalogPage({
   if (!tenantId) {
     return (
       <div className="space-y-4">
-        <h1 className="text-3xl font-bold">Aprender IA</h1>
+        <h1 className="text-3xl font-bold">{brand.navCatalog}</h1>
         <p className="text-muted-foreground">
-          Tu cuenta no tiene una organización asignada.
+          Tu cuenta aún no está enlazada a un centro o equipo. Pide ayuda a quien
+          administra la plataforma.
         </p>
       </div>
     )
@@ -34,10 +36,9 @@ export default async function LearnCatalogPage({
     <div className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Catálogo de rutas</h1>
+          <h1 className="text-3xl font-bold">Cursos para estudiar</h1>
           <p className="text-muted-foreground">
-            Cursos y módulos publicados por tu organización sobre IA para el
-            desarrollo de software.
+            Lo que tu centro ya dejó publicado. Apúntate y sigue por donde ibas.
           </p>
         </div>
         <LearnSearch initialQuery={q ?? ""} />
@@ -45,14 +46,14 @@ export default async function LearnCatalogPage({
 
       <Card>
         <CardHeader>
-          <CardTitle>Rutas publicadas</CardTitle>
+          <CardTitle>Cursos publicados</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {courses.length === 0 && (
             <p className="text-muted-foreground">
               {q
-                ? "No hay rutas que coincidan con la búsqueda."
-                : "Aún no hay rutas publicadas."}
+                ? "No hay cursos que coincidan con la búsqueda."
+                : "Aún no hay cursos publicados."}
             </p>
           )}
           {courses.map((course) => (
@@ -69,7 +70,7 @@ export default async function LearnCatalogPage({
                 </p>
               </div>
               <Button asChild>
-                <Link href={`/dashboard/learn/${course.id}`}>Abrir ruta</Link>
+                <Link href={`/dashboard/learn/${course.id}`}>Abrir curso</Link>
               </Button>
             </div>
           ))}

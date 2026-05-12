@@ -48,7 +48,7 @@ export async function POST(req: Request) {
 
   if (!enrollment) {
     return NextResponse.json(
-      { error: "Debes inscribirte en la ruta primero" },
+      { error: "Debes inscribirte en el curso primero" },
       { status: 400 }
     )
   }

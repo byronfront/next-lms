@@ -33,9 +33,9 @@ export default async function LearnLessonPage({
   if (!enrollment) {
     return (
       <div className="space-y-4">
-        <p>Debes inscribirte en esta ruta para ver esta lección.</p>
+        <p>Debes inscribirte en este curso para ver esta lección.</p>
         <Button asChild>
-          <Link href={`/dashboard/learn/${courseId}`}>Volver a la ruta</Link>
+          <Link href={`/dashboard/learn/${courseId}`}>Volver al curso</Link>
         </Button>
       </div>
     )
@@ -50,7 +50,7 @@ export default async function LearnLessonPage({
           href={`/dashboard/learn/${courseId}`}
           className="hover:text-foreground"
         >
-          ← Volver a la ruta
+          ← Volver al curso
         </Link>
       </div>
 

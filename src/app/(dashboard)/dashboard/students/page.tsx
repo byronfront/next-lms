@@ -29,7 +29,7 @@ export default async function StudentsPage() {
       <div>
         <h1 className="text-3xl font-bold">Estudiantes</h1>
         <p className="text-muted-foreground">
-          Personas en rol estudiante que siguen tus rutas sobre IA y desarrollo.
+          Estudiantes inscritos en los cursos de tu organización.
         </p>
       </div>
 

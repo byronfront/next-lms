@@ -33,14 +33,14 @@ export default function EnrollOrContinue({
   if (isEnrolled) {
     return (
       <p className="text-sm text-muted-foreground">
-        Ya estás inscrito en esta ruta. Elige una lección abajo.
+        Ya estás inscrito en este curso. Elige una lección abajo.
       </p>
     )
   }
 
   return (
     <Button onClick={enroll} disabled={loading}>
-      {loading ? "Inscribiendo…" : "Inscribirme en esta ruta"}
+      {loading ? "Inscribiendo…" : "Inscribirme en este curso"}
     </Button>
   )
 }

@@ -10,17 +10,17 @@ export default function CoursesPage() {
 
             <div className="flex justify-between">
                 <p className="text-muted-foreground">
-                    Diseña rutas y módulos sobre IA para desarrollo
+                    Monta tus cursos por partes y elige qué pueden ver quienes estudian.
                 </p>
                 <Link
                     href="/dashboard/courses/new"
                     className={buttonVariants()}
                     >
-                    + Nueva ruta
+                    + Nuevo curso
                 </Link>
             </div>
 
-            <Suspense fallback={<div>Cargando rutas…</div>}>
+            <Suspense fallback={<div>Cargando cursos…</div>}>
                 <CoursesTable />
             </Suspense>
 

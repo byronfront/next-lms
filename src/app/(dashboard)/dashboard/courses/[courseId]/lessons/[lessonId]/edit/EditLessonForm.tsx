@@ -36,7 +36,7 @@ export default function EditLessonForm({
       ? JSON.stringify(lesson.quizData, null, 2)
       : `[
   {
-    "prompt": "¿Pregunta de ejemplo?",
+    "prompt": "¿Primera pregunta del quiz?",
     "options": ["Opción A", "Opción B", "Opción C"],
     "correctIndex": 0
   }

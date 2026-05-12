@@ -60,7 +60,7 @@ export async function PATCH(
       },
     })
     if (clash) {
-      return badRequest("Ya existe una ruta con ese slug")
+      return badRequest("Ya existe un curso con ese slug")
     }
   }
 

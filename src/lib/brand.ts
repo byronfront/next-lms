@@ -1,13 +1,17 @@
 export const brand = {
-  name: "NextLMS",
-  focus: "IA para desarrollo",
-  titleSuffix: "IA para desarrollo",
+  name: "Next LMS",
+  /** Texto pequeño bajo el logo en el panel */
+  focus: "Cursos para tu equipo y tus estudiantes",
+  /** Título que ves en la pestaña del navegador */
+  titleSuffix: "Aprende en línea",
   tagline:
-    "Formación práctica en inteligencia artificial aplicada al desarrollo de software.",
+    "Monta tus cursos, divide el contenido en partes fáciles de seguir y mira cómo avanza cada persona.",
   description:
-    "Plataforma de aprendizaje centrada en IA para devs: LLMs, prompting, integración en proyectos, agentes, herramientas y buenas prácticas para equipos de software.",
+    "Pensado para academias, empresas o equipos que enseñan algo: cada centro con su espacio, y claro quién da clase y quién la recibe.",
   hero:
-    "Aprende a integrar IA en tu flujo de desarrollo: prompts útiles, APIs, patrones seguros y productividad real en código.",
+    "Reúne tus materiales en un solo sitio: tú preparas el curso y quien estudia ve todo ordenado y sencillo.",
+  /** Enlace del menú para quien va a estudiar */
+  navCatalog: "Ver cursos",
 } as const
 
 export const brandMetadataTitle = `${brand.name} · ${brand.titleSuffix}`

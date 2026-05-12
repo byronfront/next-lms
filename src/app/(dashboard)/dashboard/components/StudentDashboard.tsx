@@ -17,19 +17,18 @@ export default async function StudentDashboard({
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Tu formación en IA</h1>
+          <h1 className="text-3xl font-bold">Tu aprendizaje</h1>
           <p className="text-muted-foreground">
-            Avanza en rutas sobre IA aplicada al desarrollo y revisa tu progreso
-            por lección.
+            Sigue tus cursos inscritos y revisa el progreso lección a lección.
           </p>
         </div>
         <Button asChild>
-          <Link href="/dashboard/learn">Ver rutas publicadas</Link>
+          <Link href="/dashboard/learn">Ver cursos publicados</Link>
         </Button>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <StatCard title="Rutas inscritas" value={s.enrolledCourses} />
+        <StatCard title="Cursos inscritos" value={s.enrolledCourses} />
         <StatCard
           title="Lecciones completadas"
           value={`${s.completedLessons} / ${s.totalLessons}`}
@@ -43,7 +42,7 @@ export default async function StudentDashboard({
         </CardHeader>
         <CardContent className="flex flex-wrap gap-2">
           <Button asChild variant="outline">
-            <Link href="/dashboard/learn">Explorar rutas de IA para devs</Link>
+            <Link href="/dashboard/learn">Ver todos los cursos</Link>
           </Button>
         </CardContent>
       </Card>

@@ -39,7 +39,7 @@ export default async function CertificatePage({
       <div className="space-y-4">
         <p>Completa todas las lecciones para obtener el certificado.</p>
         <Button asChild>
-          <Link href={`/dashboard/learn/${courseId}`}>Volver a la ruta</Link>
+          <Link href={`/dashboard/learn/${courseId}`}>Volver al curso</Link>
         </Button>
       </div>
     )
@@ -55,7 +55,7 @@ export default async function CertificatePage({
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <Button asChild variant="ghost" className="mb-4">
-        <Link href={`/dashboard/learn/${courseId}`}>← Volver a la ruta</Link>
+        <Link href={`/dashboard/learn/${courseId}`}>← Volver al curso</Link>
       </Button>
 
       <Card className="border-2 border-primary/20">
@@ -69,7 +69,7 @@ export default async function CertificatePage({
           <p className="text-lg">Se certifica que</p>
           <p className="text-3xl font-bold">{userName}</p>
           <p className="text-muted-foreground">
-            ha completado la ruta de formación
+            ha completado el curso
           </p>
           <p className="text-xl font-semibold">{data.course.title}</p>
           <p className="text-sm text-muted-foreground">{date}</p>

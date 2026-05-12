@@ -1,15 +1,15 @@
 import prisma from "@/lib/prisma"
 import { Plan } from "@generated/prisma/client"
 
-/** Tenant compartido para registros y cuentas que aún no tienen organización propia. */
+/** Centro compartido cuando alguien se registra y aún no tiene un centro propio. */
 export async function ensureDefaultTenant() {
   return prisma.tenant.upsert({
     where: { slug: "default" },
     create: {
-      name: "Espacio predeterminado",
+      name: "Centro por defecto",
       slug: "default",
       plan: Plan.FREE,
     },
-    update: {},
+    update: { name: "Centro por defecto" },
   })
 }

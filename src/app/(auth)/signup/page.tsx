@@ -9,7 +9,7 @@ import { brand } from "@/lib/brand"
 
 export default function SignUpPage() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
+    <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen mesh-page-bg">
 
       <div className="flex items-center justify-center px-6">
         <Card className="w-full max-w-md border-none shadow-none">
@@ -56,11 +56,11 @@ export default function SignUpPage() {
         </Card>
       </div>
 
-      <div className="hidden md:flex items-center justify-center bg-black text-white relative overflow-hidden">
+      <div className="auth-hero-panel hidden md:flex min-h-full items-center justify-center text-white">
 
-        <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-black to-zinc-950" />
+        <div className="pointer-events-none absolute inset-0 z-[2] bg-black/35" />
 
-        <div className="relative text-center px-10">
+        <div className="relative z-[3] text-center px-10">
           <h2 className="text-3xl font-bold">Enseña sin complicarte</h2>
           <p className="text-white/60 mt-4">{brand.tagline}</p>
         </div>

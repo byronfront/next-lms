@@ -7,18 +7,22 @@ export default function LandingPage() {
   return (
     <div className="flex flex-col">
 
-      <section className="py-20 px-6 text-center">
-        <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide mb-2">
+      <section className="relative overflow-hidden py-24 px-6 text-center">
+        <div
+          className="pointer-events-none absolute -top-24 left-1/2 h-[22rem] w-[min(100%,42rem)] -translate-x-1/2 rounded-full bg-primary/20 blur-3xl motion-safe:animate-pulse"
+          aria-hidden
+        />
+        <p className="relative text-sm font-medium text-muted-foreground uppercase tracking-wide mb-2">
           {brand.focus}
         </p>
-        <h1 className="text-5xl font-bold tracking-tight">
+        <h1 className="relative mt-2 text-5xl sm:text-6xl font-bold tracking-tight bg-gradient-to-br from-foreground via-primary to-chart-2 bg-clip-text text-transparent">
           {brand.name}
         </h1>
-        <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+        <p className="relative mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
           {brand.hero}
         </p>
 
-        <div className="mt-8 flex justify-center gap-4">
+        <div className="relative mt-8 flex flex-wrap justify-center gap-4">
           <Button asChild size="lg">
             <Link href="/signup">Empezar gratis</Link>
           </Button>
@@ -29,8 +33,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section id="features" className="py-20 px-6 bg-muted/40">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
+      <section id="features" className="py-20 px-6 border-y border-border/40 bg-muted/35 backdrop-blur-sm">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3 xl:gap-10">
 
           <Card>
             <CardHeader>
@@ -73,7 +77,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3 xl:gap-10">
 
           <Card>
             <CardHeader>
@@ -93,7 +97,7 @@ export default function LandingPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-primary">
+          <Card className="border-primary ring-2 ring-primary/25 shadow-lg md:motion-safe:scale-[1.02]">
             <CardHeader>
               <CardTitle>Pro</CardTitle>
             </CardHeader>
@@ -132,7 +136,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-20 px-6 text-center bg-muted/40">
+      <section className="py-20 px-6 text-center border-t border-border/40 bg-gradient-to-b from-muted/25 to-background">
         <h2 className="text-3xl font-bold">
           Pon tus cursos en internet con {brand.name}
         </h2>

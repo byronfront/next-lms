@@ -1,10 +1,16 @@
-import { JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import type { ReactNode } from "react"
 import type { Metadata } from "next"
 import { AuthProvider } from "@/components/providers/session-provider"
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { brand, brandMetadataTitle } from "@/lib/brand"
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-app-sans",
+  display: "swap",
+})
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -23,10 +29,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="es"
-      className={`${jetbrainsMono.variable}`}
+      className={`${plusJakarta.variable} ${jetbrainsMono.variable} ${plusJakarta.className}`}
       suppressHydrationWarning
     >
-      <body>
+      <body className="antialiased">
         <ThemeProvider>
           <AuthProvider>
             {children}

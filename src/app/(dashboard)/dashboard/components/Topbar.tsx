@@ -10,7 +10,7 @@ export function Topbar() {
   const { data: session } = useSession()
 
   return (
-    <header className="h-16 border-b bg-background flex items-center justify-between px-6">
+    <header className="h-16 border-b border-border/50 bg-background/75 backdrop-blur-md flex items-center justify-between px-6 shadow-sm rounded-b-2xl">
 
       <div className="w-full max-w-sm">
         <Input placeholder="Buscar en el panel…" />

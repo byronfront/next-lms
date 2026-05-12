@@ -7,7 +7,7 @@ import { brand } from "@/lib/brand"
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/70 backdrop-blur">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/55 backdrop-blur-xl supports-[backdrop-filter]:bg-background/45 rounded-b-2xl shadow-sm">
       <div className="max-w-6xl mx-auto flex h-16 items-center justify-between px-6">
 
         <Link href="/" className="font-bold text-lg tracking-tight leading-tight">

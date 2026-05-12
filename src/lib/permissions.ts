@@ -1,4 +1,4 @@
-import type { Role } from "@/lib/generated/prisma/client"
+import type { Role } from "@generated/prisma/client"
 
 const MANAGE_ROLES: Role[] = ["SUPER_ADMIN", "ADMIN", "INSTRUCTOR"]
 

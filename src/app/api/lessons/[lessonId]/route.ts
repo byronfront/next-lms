@@ -10,7 +10,7 @@ import {
   requireSession,
   unauthorized,
 } from "@/lib/api-route"
-import { Prisma } from "@/lib/generated/prisma/client"
+import { Prisma } from "@generated/prisma/client"
 
 export async function PATCH(
   req: Request,

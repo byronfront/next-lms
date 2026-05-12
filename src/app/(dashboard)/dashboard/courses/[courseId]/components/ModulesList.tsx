@@ -1,6 +1,6 @@
 import CreateModuleForm from "./CreateModuleForm"
 import LessonsList from "./LessonsList"
-import type { Lesson, Module } from "@/lib/generated/prisma/client"
+import type { Lesson, Module } from "@generated/prisma/client"
 
 export type CourseWithModuleTree = {
   id: string

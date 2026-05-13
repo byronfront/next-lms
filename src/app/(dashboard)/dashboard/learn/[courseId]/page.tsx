@@ -111,9 +111,6 @@ export default async function LearnCoursePage({
                       >
                         {done ? "✓ " : ""}
                         {lesson.title}
-                        <span className="text-xs text-muted-foreground ml-2">
-                          ({lesson.type})
-                        </span>
                       </Link>
                     </li>
                   )

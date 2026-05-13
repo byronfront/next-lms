@@ -20,11 +20,10 @@ export default function LessonsList({
           className="text-sm border p-2 rounded-md flex flex-wrap items-center justify-between gap-2"
         >
           <span>
-            {lesson.title}{" "}
-            <span className="text-muted-foreground">
-              ({lesson.type}
-              {lesson.isPublished ? "" : ", borrador"})
-            </span>
+            {lesson.title}
+            {!lesson.isPublished ? (
+              <span className="text-muted-foreground"> (borrador)</span>
+            ) : null}
           </span>
           <Button asChild variant="outline" size="sm">
             <Link href={`/dashboard/courses/${courseId}/lessons/${lesson.id}/edit`}>

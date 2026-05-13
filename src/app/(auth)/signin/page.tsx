@@ -28,15 +28,18 @@ export default function SignInPage() {
     setError(null)
     setLoading(true)
     try {
+      // Debe ser URL absoluta: con redirect:false, next-auth hace new URL(data.url)
+      // y una ruta relativa como "/dashboard" rompe el cliente (TypeError).
+      const afterLogin = `${window.location.origin}/dashboard`
       const result = await signIn("credentials", {
         email: email.trim(),
         password,
-        callbackUrl: "/dashboard",
+        callbackUrl: afterLogin,
         redirect: false,
       })
 
-      if (result?.ok === true && result.url) {
-        window.location.assign(result.url)
+      if (result?.ok === true) {
+        window.location.assign(result.url ?? afterLogin)
         return
       }
 
@@ -101,11 +104,27 @@ export default function SignInPage() {
             </Button>
 
             <div className="space-y-2 pt-2">
-              <Button className="w-full" variant="outline" onClick={() => signIn("google", { callbackUrl: "/dashboard" })}>
+              <Button
+                className="w-full"
+                variant="outline"
+                onClick={() =>
+                  signIn("google", {
+                    callbackUrl: `${window.location.origin}/dashboard`,
+                  })
+                }
+              >
                 Continuar con Google
               </Button>
 
-              <Button className="w-full" variant="outline" onClick={() => signIn("github", { callbackUrl: "/dashboard" })}>
+              <Button
+                className="w-full"
+                variant="outline"
+                onClick={() =>
+                  signIn("github", {
+                    callbackUrl: `${window.location.origin}/dashboard`,
+                  })
+                }
+              >
                 Continuar con GitHub
               </Button>
             </div>

@@ -1,0 +1,307 @@
+================================================================================
+IMÁGENES PNG — CURSO «IA PARA DESARROLLO FRONTEND» (Next LMS)
+================================================================================
+Formato de salida: PNG (exportar o convertir desde el modelo; mantener trans-
+parencia solo si aplica; para fotos ilustradas usar fondo opaco oscuro).
+
+Convención de nombres: ia-fe-m{Módulo}-l{Lección}-{clave}.png
+  m01–m04 = orden del módulo en el curso
+  l01, l02… = orden de la lección dentro de ese módulo (solo lecciones de texto)
+
+Ubicación sugerida en el repo: public/courses/ia-frontend/
+
+Cada prompt termina con el MISMO bloque ESTILO_MAESTRO (copiarlo literal al
+generar, sin omitir la última frase).
+
+--------------------------------------------------------------------------------
+ESTILO_MAESTRO (pegar al final de CADA prompt de imagen)
+--------------------------------------------------------------------------------
+Flat editorial illustration OR clean 3D isometric scene, tech education,
+dark background deep blue-violet #121026 to #1a1530 gradient feel,
+accent colors electric violet #7c6cff and soft magenta #c084fc highlights,
+subtle cyan rim light #38bdf8, soft grain, high contrast readable shapes,
+no text in image, no logos, no watermarks, 16:9 wide composition, calm
+professional mood, consistent with online learning UI.
+
+Negativos opcionales (añadir si la herramienta lo permite): texto legible en
+la imagen, marcas de agua, logotipos de marca, fondos pastel claros, caos
+visual innecesario.
+
+--------------------------------------------------------------------------------
+IMAGEN DE PORTADA DEL CURSO (tarjetas / catálogo)
+--------------------------------------------------------------------------------
+Nombre archivo:  ia-fe-course-thumbnail.png
+Formato:         PNG
+Tamaño sugerido: 1200×675 px (16:9) o 1024×1024 si el catálogo exige cuadrado.
+
+Prompt:
+Wide hero illustration for an online course titled conceptually "AI for
+frontend development": developer at a workstation with floating panels
+showing React-like components, a subtle neural mesh, and a browser window;
+cohesive violet–indigo night palette; single clear focal point; cinematic
+but readable at small thumbnail size.
+ESTILO_MAESTRO
+
+--------------------------------------------------------------------------------
+MÓDULO 1 — LECCIÓN 1 · «Qué aporta la IA en frontend (y qué no)»
+--------------------------------------------------------------------------------
+
+--- Imagen 1 (debajo del H1 del markdown) ---
+Nombre archivo:  ia-fe-m01-l01-expectativas-hero.png
+Formato:         PNG
+Tamaño sugerido: 1920×810 px (21:9) o 1600×900 (16:9)
+
+Prompt:
+Hero scene: calm developer at laptop, soft holographic orb suggesting AI
+assistance with floating code tokens and a minimal browser frame; conveys
+"realistic expectations" not sci-fi overload; balanced composition.
+ESTILO_MAESTRO
+
+--- Imagen 2 (sección H2 «Dónde sí ayuda») ---
+Nombre archivo:  ia-fe-m01-l01-donde-si-ayuda.png
+Formato:         PNG
+Tamaño sugerido: 1920×820 px (21:9)
+
+Prompt:
+Split transition: left side messy draft code blocks and sticky notes, right
+side clean React-like component tiles with gentle spark trails; violet
+accent emphasizes the "clean" side; metaphor for drafting, explaining,
+translating stacks, and tests.
+ESTILO_MAESTRO
+
+--- Imagen 3 (sección H2 «Dónde debes mandar tú») ---
+Nombre archivo:  ia-fe-m01-l01-donde-debes-mandar-tu.png
+Formato:         PNG
+Tamaño sugerido: 1920×820 px (21:9)
+
+Prompt:
+Architecture and responsibility theme: layered folder tree blueprint,
+subtle shield for security, contrast bars for accessibility, slim performance
+gauge; human silhouette pointing to decisions the AI should not own alone.
+ESTILO_MAESTRO
+
+--------------------------------------------------------------------------------
+MÓDULO 1 — LECCIÓN 2 · «Herramientas típicas en el flujo frontend»
+--------------------------------------------------------------------------------
+
+--- Imagen 4 ---
+Nombre archivo:  ia-fe-m01-l02-herramientas-hero.png
+Formato:         PNG
+Tamaño sugerido: 1920×810 px (21:9)
+
+Prompt:
+Isometric toolchain strip: IDE window, chat bubble, design-to-code tile,
+terminal strip; icons abstract (no real trademarks); unified lighting;
+suggests "tools you will see in frontend teams".
+ESTILO_MAESTRO
+
+--- Imagen 5 (H2 «Cómo elegir») ---
+Nombre archivo:  ia-fe-m01-l02-como-elegir.png
+Formato:         PNG
+Tamaño sugerido: 1920×820 px (21:9)
+
+Prompt:
+Decision flow: branching paths from one developer figure to three abstract
+tool lanes (inline assistant, general chat, design-to-code); arrows and
+soft labels as shapes only (no text); emphasis on reducing context switching.
+ESTILO_MAESTRO
+
+--- Imagen 6 (H2 «Buenas prácticas») ---
+Nombre archivo:  ia-fe-m01-l02-buenas-practicas.png
+Formato:         PNG
+Tamaño sugerido: 1920×820 px (21:9)
+
+Prompt:
+Practice and safety: clipboard with abstract "policy" sheets, small lock,
+redacted secret blocks, and a trimmed code snippet window showing "minimal
+context pasted"; calm compliance mood.
+ESTILO_MAESTRO
+
+--------------------------------------------------------------------------------
+MÓDULO 2 — LECCIÓN 1 · «Plantillas de prompt para UI en React»
+--------------------------------------------------------------------------------
+
+--- Imagen 7 ---
+Nombre archivo:  ia-fe-m02-l01-prompts-hero.png
+Formato:         PNG
+Tamaño sugerido: 1920×810 px (21:9)
+
+Prompt:
+Prompt engineering for UI: stacked structured cards (stack, style,
+constraints as abstract shapes) flowing into a stylized model core;
+organized layers suggesting iteration and refinement.
+ESTILO_MAESTRO
+
+--- Imagen 8 (H2 «Ejemplo: componente presentacional») ---
+Nombre archivo:  ia-fe-m02-l01-ejemplo-componente.png
+Formato:         PNG
+Tamaño sugerido: 1920×820 px (21:9)
+
+Prompt:
+Presentational UI card being assembled from blocks: title bar, body text,
+action slot; floating Tailwind-like utility chips as abstract pills (no
+readable words); hover/focus glow rings for accessibility hint.
+ESTILO_MAESTRO
+
+--- Imagen 9 (H2 «Ejemplo: refactor») ---
+Nombre archivo:  ia-fe-m02-l01-ejemplo-refactor.png
+Formato:         PNG
+Tamaño sugerido: 1920×820 px (21:9)
+
+Prompt:
+Refactor metaphor: one large tangled component cube splitting into two
+smaller memoized tiles with a memoization sparkle; diff-like minus/plus as
+abstract shapes only (no text).
+ESTILO_MAESTRO
+
+--- Imagen 10 (H2 «Ejemplo: CSS / responsive») ---
+Nombre archivo:  ia-fe-m02-l01-ejemplo-css-responsive.png
+Formato:         PNG
+Tamaño sugerido: 1920×820 px (21:9)
+
+Prompt:
+Responsive layout: one abstract grid morphing from 1 column to 2 to 3
+columns across three vertical device silhouettes; consistent gap rhythm;
+utility-first vibe without real CSS text.
+ESTILO_MAESTRO
+
+--------------------------------------------------------------------------------
+MÓDULO 2 — LECCIÓN 2 · «Accesibilidad y calidad: qué pedir explícitamente»
+--------------------------------------------------------------------------------
+
+--- Imagen 11 ---
+Nombre archivo:  ia-fe-m02-l02-a11y-hero.png
+Formato:         PNG
+Tamaño sugerido: 1920×810 px (21:9)
+
+Prompt:
+Accessibility-first UI lab: keyboard focus ring on a button-like tile,
+abstract aria attributes as geometric tags (no letters), modal outline with
+escape-key hint as a simple key shape without labels.
+ESTILO_MAESTRO
+
+--- Imagen 12 (H2 «Calidad de código») ---
+Nombre archivo:  ia-fe-m02-l02-calidad-codigo.png
+Formato:         PNG
+Tamaño sugerido: 1920×820 px (21:9)
+
+Prompt:
+Code quality: strict typing visualized as tight-fitting puzzle pieces,
+meaningful tokens as colored chips (no words), useEffect vs event-handler as
+two pathways with a human choosing the simpler path.
+ESTILO_MAESTRO
+
+--------------------------------------------------------------------------------
+MÓDULO 3 — LECCIÓN 1 · «Iterar con diff y pruebas rápidas»
+--------------------------------------------------------------------------------
+
+--- Imagen 13 ---
+Nombre archivo:  ia-fe-m03-l01-flujo-hero.png
+Formato:         PNG
+Tamaño sugerido: 1920×810 px (21:9)
+
+Prompt:
+Iteration loop: generate → read diff → run checks → small targeted fix;
+four connected nodes around a central file icon; subtle console and linter
+glyphs as abstract shapes.
+ESTILO_MAESTRO
+
+--- Imagen 14 (H2 «Frontend rápido») ---
+Nombre archivo:  ia-fe-m03-l01-frontend-rapido.png
+Formato:         PNG
+Tamaño sugerido: 1920×820 px (21:9)
+
+Prompt:
+Fast frontend validation: Storybook-like frame with component states,
+React DevTools abstract flame/profiler hint, demo route as a simple map pin;
+emphasis on quick feedback without backend.
+ESTILO_MAESTRO
+
+--------------------------------------------------------------------------------
+MÓDULO 3 — LECCIÓN 2 · «Límites legales, datos y dependencias»
+--------------------------------------------------------------------------------
+
+--- Imagen 15 ---
+Nombre archivo:  ia-fe-m03-l02-licencias-hero.png
+Formato:         PNG
+Tamaño sugerido: 1920×810 px (21:9)
+
+Prompt:
+Legal and data safety: scales with code scroll, crossed-out user-profile
+silhouettes entering a cloud (do not upload real data), CVE shield scanning
+package boxes; serious tone.
+ESTILO_MAESTRO
+
+--- Imagen 16 (H2 «Arquitectura») ---
+Nombre archivo:  ia-fe-m03-l02-arquitectura.png
+Formato:         PNG
+Tamaño sugerido: 1920×820 px (21:9)
+
+Prompt:
+Layered architecture: UI layer, data layer, business rules as three stacked
+transparent planes; AI hand suggesting a shortcut in the wrong layer being
+gently redirected by a human hand silhouette.
+ESTILO_MAESTRO
+
+--------------------------------------------------------------------------------
+MÓDULO 4 — LECCIÓN 1 · «Checklist: de idea a componente mergeable»
+--------------------------------------------------------------------------------
+
+--- Imagen 17 ---
+Nombre archivo:  ia-fe-m04-l01-antes-del-pr-hero.png
+Formato:         PNG
+Tamaño sugerido: 1920×810 px (21:9)
+
+Prompt:
+Pre-PR checklist atmosphere: abstract checklist panels with checkmarks,
+lint/type icons as geometric badges, mobile and keyboard silhouettes, empty
+secret vault; sense of readiness before merge.
+ESTILO_MAESTRO
+
+--- Imagen 18 (H2 «Siguientes pasos») ---
+Nombre archivo:  ia-fe-m04-l01-siguientes-pasos.png
+Formato:         PNG
+Tamaño sugerido: 1920×820 px (21:9)
+
+Prompt:
+Next steps roadmap: path continuing toward testing library motif (beaker +
+UI tile), design-system tokens as aligned chips, pair-programming handshake
+between human and abstract AI partner wireframe.
+ESTILO_MAESTRO
+
+================================================================================
+LISTADO RÁPIDO DE ARCHIVOS (todos PNG)
+================================================================================
+ia-fe-course-thumbnail.png
+ia-fe-m01-l01-expectativas-hero.png
+ia-fe-m01-l01-donde-si-ayuda.png
+ia-fe-m01-l01-donde-debes-mandar-tu.png
+ia-fe-m01-l02-herramientas-hero.png
+ia-fe-m01-l02-como-elegir.png
+ia-fe-m01-l02-buenas-practicas.png
+ia-fe-m02-l01-prompts-hero.png
+ia-fe-m02-l01-ejemplo-componente.png
+ia-fe-m02-l01-ejemplo-refactor.png
+ia-fe-m02-l01-ejemplo-css-responsive.png
+ia-fe-m02-l02-a11y-hero.png
+ia-fe-m02-l02-calidad-codigo.png
+ia-fe-m03-l01-flujo-hero.png
+ia-fe-m03-l01-frontend-rapido.png
+ia-fe-m03-l02-licencias-hero.png
+ia-fe-m03-l02-arquitectura.png
+ia-fe-m04-l01-antes-del-pr-hero.png
+ia-fe-m04-l01-siguientes-pasos.png
+
+================================================================================
+CÓMO USAR EN LA PLATAFORMA
+================================================================================
+1. Genera cada imagen con su prompt + ESTILO_MAESTRO y guárdala con el nombre
+   indicado (extensión .png).
+2. Sube los PNG a tu hosting o colócalos en public/courses/ia-frontend/.
+3. En el markdown de la lección, debajo del placeholder visual o en su lugar,
+   inserta por ejemplo:
+   ![Expectativas](/courses/ia-frontend/ia-fe-m01-l01-expectativas-hero.png)
+4. Para la miniatura del curso en base de datos, apunta el campo thumbnail a
+   la ruta del PNG (p. ej. /courses/ia-frontend/ia-fe-course-thumbnail.png).
+
+================================================================================

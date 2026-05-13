@@ -1,12 +1,19 @@
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import prisma from "@/lib/prisma"
-import { canManageCourses } from "@/lib/permissions"
+import { canManageCourses, isSuperAdmin } from "@/lib/permissions"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default async function StudentsPage() {
   const session = await auth()
-  if (!session?.user?.tenantId) {
+  if (!session?.user) {
+    redirect("/dashboard")
+  }
+
+  const superAdmin = isSuperAdmin(session.user.role)
+  const tenantId = session.user.tenantId
+
+  if (!tenantId && !superAdmin) {
     redirect("/dashboard")
   }
   if (!canManageCourses(session.user.role)) {
@@ -15,11 +22,12 @@ export default async function StudentsPage() {
 
   const students = await prisma.user.findMany({
     where: {
-      tenantId: session.user.tenantId,
       role: "STUDENT",
+      ...(superAdmin ? {} : { tenantId: tenantId! }),
     },
     orderBy: { createdAt: "desc" },
     include: {
+      tenant: superAdmin ? { select: { name: true, slug: true } } : false,
       _count: { select: { enrollments: true } },
     },
   })
@@ -29,7 +37,9 @@ export default async function StudentsPage() {
       <div>
         <h1 className="text-3xl font-bold">Estudiantes</h1>
         <p className="text-muted-foreground">
-          Estudiantes inscritos en los cursos de tu organización.
+          {superAdmin
+            ? "Usuarios con rol estudiante en todas las organizaciones."
+            : "Estudiantes inscritos en los cursos de tu organización."}
         </p>
       </div>
 
@@ -47,11 +57,23 @@ export default async function StudentsPage() {
                   key={u.id}
                   className="flex flex-wrap items-center justify-between gap-2 px-4 py-3"
                 >
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="font-medium">{u.name ?? "Sin nombre"}</p>
-                    <p className="text-sm text-muted-foreground">{u.email}</p>
+                    <p className="text-sm text-muted-foreground truncate">
+                      {u.email ?? "Sin correo"}
+                    </p>
+                    {superAdmin && u.tenant && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {u.tenant.name}
+                      </p>
+                    )}
+                    {superAdmin && !u.tenant && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Sin organización asignada
+                      </p>
+                    )}
                   </div>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-muted-foreground shrink-0">
                     {u._count.enrollments} inscripciones
                   </p>
                 </li>

@@ -1,6 +1,19 @@
 import prisma from "@/lib/prisma"
-import { getTenantId } from "@/lib/getTenant"
+import { auth } from "@/lib/auth"
+import { getEffectiveTenantIdForUser } from "@/lib/getTenant"
+import { isSuperAdmin } from "@/lib/permissions"
 import ModulesList from "./components/ModulesList"
+
+const courseInclude = {
+  modules: {
+    orderBy: { position: "asc" as const },
+    include: {
+      lessons: {
+        orderBy: { position: "asc" as const },
+      },
+    },
+  },
+} as const
 
 export default async function CourseDetailPage({
   params,
@@ -9,24 +22,26 @@ export default async function CourseDetailPage({
 }) {
   const resolvedParams = await params
 
-  const tenantId = await getTenantId()
+  const session = await auth()
+  if (!session?.user) {
+    return <div>Ruta no encontrada</div>
+  }
 
-  const course = await prisma.course.findFirst({
-    where: {
-      id: resolvedParams.courseId,
-      tenantId,
-    },
-    include: {
-      modules: {
-        orderBy: { position: "asc" },
-        include: {
-          lessons: {
-            orderBy: { position: "asc" },
+  const tenantId = await getEffectiveTenantIdForUser(session.user)
+  const course = isSuperAdmin(session.user.role)
+    ? await prisma.course.findFirst({
+        where: { id: resolvedParams.courseId },
+        include: courseInclude,
+      })
+    : tenantId
+      ? await prisma.course.findFirst({
+          where: {
+            id: resolvedParams.courseId,
+            tenantId,
           },
-        },
-      },
-    },
-  })
+          include: courseInclude,
+        })
+      : null
 
   if (!course) {
     return <div>Ruta no encontrada</div>

@@ -1,9 +1,13 @@
 import Link from "next/link"
 import { auth } from "@/lib/auth"
-import { getLessonForLearner } from "@/lib/data/learn"
+import {
+  getLessonForLearner,
+  resolveTenantIdForLearnSession,
+} from "@/lib/data/learn"
 import { Button } from "@/components/ui/button"
 import CompleteLessonButton from "./components/CompleteLessonButton"
 import QuizPlayer from "./components/QuizPlayer"
+import { LessonMarkdown } from "@/components/learn/LessonMarkdown"
 
 export default async function LearnLessonPage({
   params,
@@ -13,14 +17,19 @@ export default async function LearnLessonPage({
   const session = await auth()
   const { courseId, lessonId } = await params
 
-  if (!session?.user?.tenantId || !session.user.id) {
+  if (!session?.user?.id) {
+    return null
+  }
+
+  const tenantId = await resolveTenantIdForLearnSession(session.user, courseId)
+  if (!tenantId) {
     return null
   }
 
   const data = await getLessonForLearner(
     courseId,
     lessonId,
-    session.user.tenantId,
+    tenantId,
     session.user.id
   )
 
@@ -44,7 +53,7 @@ export default async function LearnLessonPage({
   const isDone = progress?.isCompleted ?? false
 
   return (
-    <div className="space-y-6 max-w-3xl">
+    <div className="space-y-6 max-w-4xl">
       <div className="flex items-center gap-4 text-sm text-muted-foreground">
         <Link
           href={`/dashboard/learn/${courseId}`}
@@ -54,7 +63,7 @@ export default async function LearnLessonPage({
         </Link>
       </div>
 
-      <h1 className="text-3xl font-bold">{lesson.title}</h1>
+      <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{lesson.title}</h1>
 
       {lesson.type === "VIDEO" && lesson.videoUrl && (
         <div className="aspect-video w-full overflow-hidden rounded-lg bg-black">
@@ -69,9 +78,7 @@ export default async function LearnLessonPage({
       )}
 
       {lesson.type === "TEXT" && lesson.content && (
-        <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">
-          {lesson.content}
-        </div>
+        <LessonMarkdown markdown={lesson.content} />
       )}
 
       {lesson.type === "QUIZ" && lesson.quizData && (

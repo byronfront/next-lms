@@ -1,7 +1,9 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import prisma from "@/lib/prisma"
-import { getTenantId } from "@/lib/getTenant"
+import { auth } from "@/lib/auth"
+import { getEffectiveTenantIdForUser } from "@/lib/getTenant"
+import { isSuperAdmin } from "@/lib/permissions"
 import { Button } from "@/components/ui/button"
 import EditLessonForm from "./EditLessonForm"
 
@@ -11,17 +13,34 @@ export default async function EditLessonPage({
   params: Promise<{ courseId: string; lessonId: string }>
 }) {
   const { courseId, lessonId } = await params
-  const tenantId = await getTenantId()
 
-  const lesson = await prisma.lesson.findFirst({
-    where: {
-      id: lessonId,
-      module: { courseId, course: { tenantId } },
-    },
-    include: {
-      module: { include: { course: { select: { title: true } } } },
-    },
-  })
+  const session = await auth()
+  if (!session?.user) {
+    notFound()
+  }
+
+  const tenantId = await getEffectiveTenantIdForUser(session.user)
+  const lesson = isSuperAdmin(session.user.role)
+    ? await prisma.lesson.findFirst({
+        where: {
+          id: lessonId,
+          module: { courseId },
+        },
+        include: {
+          module: { include: { course: { select: { title: true } } } },
+        },
+      })
+    : tenantId
+      ? await prisma.lesson.findFirst({
+          where: {
+            id: lessonId,
+            module: { courseId, course: { tenantId } },
+          },
+          include: {
+            module: { include: { course: { select: { title: true } } } },
+          },
+        })
+      : null
 
   if (!lesson) {
     notFound()

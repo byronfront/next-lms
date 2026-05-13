@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import type { Session } from "next-auth"
 import prisma from "@/lib/prisma"
-import { canManageCourses } from "@/lib/permissions"
+import { canManageCourses, isSuperAdmin } from "@/lib/permissions"
 
 export function unauthorized(message = "No autorizado") {
   return NextResponse.json({ error: message }, { status: 401 })
@@ -48,6 +48,28 @@ export async function assertLessonInTenant(lessonId: string, tenantId: string) {
     where: { id: lessonId, module: { course: { tenantId } } },
     include: { module: { include: { course: true } } },
   })
+}
+
+export async function assertModuleForManager(moduleId: string, user: ApiSessionUser) {
+  if (isSuperAdmin(user.role)) {
+    return prisma.module.findFirst({
+      where: { id: moduleId },
+      include: { course: true },
+    })
+  }
+  if (!user.tenantId) return null
+  return assertModuleInTenant(moduleId, user.tenantId)
+}
+
+export async function assertLessonForManager(lessonId: string, user: ApiSessionUser) {
+  if (isSuperAdmin(user.role)) {
+    return prisma.lesson.findFirst({
+      where: { id: lessonId },
+      include: { module: { include: { course: true } } },
+    })
+  }
+  if (!user.tenantId) return null
+  return assertLessonInTenant(lessonId, user.tenantId)
 }
 
 export function assertCanManage(user: ApiSessionUser) {

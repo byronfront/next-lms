@@ -1,6 +1,9 @@
 import Link from "next/link"
 import { auth } from "@/lib/auth"
-import { getLearnerCourseOutline } from "@/lib/data/learn"
+import {
+  getLearnerCourseOutline,
+  resolveTenantIdForLearnSession,
+} from "@/lib/data/learn"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import EnrollOrContinue from "./components/EnrollOrContinue"
@@ -13,13 +16,18 @@ export default async function LearnCoursePage({
   const session = await auth()
   const { courseId } = await params
 
-  if (!session?.user?.tenantId || !session.user.id) {
+  if (!session?.user?.id) {
+    return null
+  }
+
+  const tenantId = await resolveTenantIdForLearnSession(session.user, courseId)
+  if (!tenantId) {
     return null
   }
 
   const data = await getLearnerCourseOutline(
     courseId,
-    session.user.tenantId,
+    tenantId,
     session.user.id
   )
 

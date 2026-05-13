@@ -7,18 +7,23 @@ import {
   requireSession,
   unauthorized,
 } from "@/lib/api-route"
+import { getEffectiveTenantIdForUser } from "@/lib/getTenant"
 
 export async function GET() {
   const session = await auth()
   const user = requireSession(session)
-  if (!user?.tenantId) {
+  if (!user) {
+    return unauthorized()
+  }
+  const tenantId = await getEffectiveTenantIdForUser(user)
+  if (!tenantId) {
     return unauthorized()
   }
 
   const enrollments = await prisma.enrollment.findMany({
     where: {
       userId: user.id,
-      course: { tenantId: user.tenantId },
+      course: { tenantId },
     },
     include: {
       course: {
@@ -38,7 +43,11 @@ export async function GET() {
 export async function POST(req: Request) {
   const session = await auth()
   const user = requireSession(session)
-  if (!user?.tenantId) {
+  if (!user) {
+    return unauthorized()
+  }
+  const tenantId = await getEffectiveTenantIdForUser(user)
+  if (!tenantId) {
     return unauthorized()
   }
 
@@ -58,7 +67,7 @@ export async function POST(req: Request) {
   const course = await prisma.course.findFirst({
     where: {
       id: courseId,
-      tenantId: user.tenantId,
+      tenantId,
       isPublished: true,
     },
   })

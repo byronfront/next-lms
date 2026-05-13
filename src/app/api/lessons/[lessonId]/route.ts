@@ -4,7 +4,7 @@ import { auth } from "@/lib/auth"
 import { updateLessonSchema } from "@/lib/validation"
 import {
   assertCanManage,
-  assertLessonInTenant,
+  assertLessonForManager,
   badRequest,
   forbidden,
   requireSession,
@@ -18,7 +18,7 @@ export async function PATCH(
 ) {
   const session = await auth()
   const user = requireSession(session)
-  if (!user?.tenantId) {
+  if (!user) {
     return unauthorized()
   }
   if (!assertCanManage(user)) {
@@ -26,7 +26,7 @@ export async function PATCH(
   }
 
   const { lessonId } = await ctx.params
-  const lesson = await assertLessonInTenant(lessonId, user.tenantId)
+  const lesson = await assertLessonForManager(lessonId, user)
   if (!lesson) {
     return NextResponse.json({ error: "Lección no encontrada" }, { status: 404 })
   }

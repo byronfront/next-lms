@@ -4,7 +4,7 @@ import { auth } from "@/lib/auth"
 import { createLessonSchema } from "@/lib/validation"
 import {
   assertCanManage,
-  assertModuleInTenant,
+  assertModuleForManager,
   badRequest,
   forbidden,
   requireSession,
@@ -14,7 +14,7 @@ import {
 export async function POST(req: Request) {
   const session = await auth()
   const user = requireSession(session)
-  if (!user?.tenantId) {
+  if (!user) {
     return unauthorized()
   }
   if (!assertCanManage(user)) {
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
   }
 
   const { moduleId, title, type } = parsed.data
-  const mod = await assertModuleInTenant(moduleId, user.tenantId)
+  const mod = await assertModuleForManager(moduleId, user)
   if (!mod) {
     return NextResponse.json({ error: "Módulo no encontrado" }, { status: 404 })
   }

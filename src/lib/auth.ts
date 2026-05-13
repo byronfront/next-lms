@@ -23,38 +23,59 @@ declare module "next-auth" {
 }
 
 async function getUserFromDb(email: string, password: string) {
+  const normalized = email.trim().toLowerCase()
+  if (!normalized) return null
+
   const user = await prisma.user.findFirst({
-    where: { email },
-  });
+    where: {
+      email: { equals: normalized, mode: "insensitive" },
+    },
+  })
 
   if (!user || !user.password) {
-    return null;
+    return null
   }
 
-  const isValidPassword = await compare(password, user.password);
+  const isValidPassword = await compare(password, user.password)
 
   if (!isValidPassword) {
-    return null;
+    return null
   }
 
-  return user;
+  return user
 }
- 
+
+const googleConfigured =
+  Boolean(process.env.AUTH_GOOGLE_ID?.length) &&
+  Boolean(process.env.AUTH_GOOGLE_SECRET?.length)
+const githubConfigured =
+  Boolean(process.env.AUTH_GITHUB_ID?.length) &&
+  Boolean(process.env.AUTH_GITHUB_SECRET?.length)
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  trustHost: true,
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
   pages: {
     signIn: "/signin",
   },
   providers: [
-    Google({
-      clientId: process.env.AUTH_GOOGLE_ID as string,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET as string,
-    }),
-    GitHub({
-      clientId: process.env.AUTH_GITHUB_ID as string,
-      clientSecret: process.env.AUTH_GITHUB_SECRET as string,
-    }),
+    ...(googleConfigured
+      ? [
+          Google({
+            clientId: process.env.AUTH_GOOGLE_ID as string,
+            clientSecret: process.env.AUTH_GOOGLE_SECRET as string,
+          }),
+        ]
+      : []),
+    ...(githubConfigured
+      ? [
+          GitHub({
+            clientId: process.env.AUTH_GITHUB_ID as string,
+            clientSecret: process.env.AUTH_GITHUB_SECRET as string,
+          }),
+        ]
+      : []),
     Credentials({
       credentials: {
         email: {},
@@ -95,7 +116,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         if (dbUser) {
           token.role = dbUser.role
-          if (!dbUser.tenantId) {
+          if (dbUser.role === "SUPER_ADMIN") {
+            token.tenantId = dbUser.tenantId
+          } else if (!dbUser.tenantId) {
             const tenant = await ensureDefaultTenant()
             await prisma.user.update({
               where: { id: userId },

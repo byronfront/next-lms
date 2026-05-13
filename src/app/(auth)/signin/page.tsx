@@ -8,9 +8,47 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { brand } from "@/lib/brand"
 
+function loginErrorMessage(error: string | undefined, code: string | undefined) {
+  if (error === "CredentialsSignin" || code === "credentials") {
+    return "Correo o contraseña incorrectos."
+  }
+  if (error) {
+    return "No se pudo iniciar sesión. Revisa AUTH_SECRET, la base de datos y los logs del servidor."
+  }
+  return "No se pudo iniciar sesión. Inténtalo de nuevo."
+}
+
 export default function SignInPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  async function signInWithCredentials() {
+    setError(null)
+    setLoading(true)
+    try {
+      const result = await signIn("credentials", {
+        email: email.trim(),
+        password,
+        callbackUrl: "/dashboard",
+        redirect: false,
+      })
+
+      if (result?.ok === true && result.url) {
+        window.location.assign(result.url)
+        return
+      }
+
+      setError(loginErrorMessage(result?.error, result?.code))
+    } catch {
+      setError(
+        "Error al contactar el servidor de autenticación. Comprueba que la app esté en marcha y que exista AUTH_SECRET."
+      )
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen mesh-page-bg">
@@ -29,9 +67,17 @@ export default function SignInPage() {
 
           <CardContent className="space-y-4">
 
+            {error ? (
+              <p className="text-sm text-destructive" role="alert">
+                {error}
+              </p>
+            ) : null}
+
             <div className="space-y-2">
               <Input
                 placeholder="Correo electrónico"
+                type="email"
+                autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -39,6 +85,7 @@ export default function SignInPage() {
               <Input
                 placeholder="Contraseña"
                 type="password"
+                autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -46,15 +93,11 @@ export default function SignInPage() {
 
             <Button
               className="w-full"
-              onClick={() =>
-                signIn("credentials", {
-                  email,
-                  password,
-                  callbackUrl: "/dashboard",
-                })
-              }
+              disabled={loading}
+              type="button"
+              onClick={() => void signInWithCredentials()}
             >
-              Iniciar sesión
+              {loading ? "Entrando…" : "Iniciar sesión"}
             </Button>
 
             <div className="space-y-2 pt-2">

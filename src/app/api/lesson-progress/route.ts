@@ -7,11 +7,16 @@ import {
   requireSession,
   unauthorized,
 } from "@/lib/api-route"
+import { getEffectiveTenantIdForUser } from "@/lib/getTenant"
 
 export async function POST(req: Request) {
   const session = await auth()
   const user = requireSession(session)
-  if (!user?.tenantId) {
+  if (!user) {
+    return unauthorized()
+  }
+  const tenantId = await getEffectiveTenantIdForUser(user)
+  if (!tenantId) {
     return unauthorized()
   }
 
@@ -32,7 +37,7 @@ export async function POST(req: Request) {
   const lesson = await prisma.lesson.findFirst({
     where: {
       id: lessonId,
-      module: { courseId, course: { tenantId: user.tenantId } },
+      module: { courseId, course: { tenantId } },
     },
   })
 

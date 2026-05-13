@@ -9,12 +9,17 @@ import {
   requireSession,
   unauthorized,
 } from "@/lib/api-route"
+import { getEffectiveTenantIdForUser } from "@/lib/getTenant"
 import { slugify } from "@/lib/slugify"
 
 export async function POST(req: Request) {
   const session = await auth()
   const user = requireSession(session)
-  if (!user?.tenantId) {
+  if (!user) {
+    return unauthorized()
+  }
+  const tenantId = await getEffectiveTenantIdForUser(user)
+  if (!tenantId) {
     return unauthorized("Se requiere organización (tenant)")
   }
   if (!assertCanManage(user)) {
@@ -39,7 +44,7 @@ export async function POST(req: Request) {
   let n = 0
   while (
     await prisma.course.findUnique({
-      where: { tenantId_slug: { tenantId: user.tenantId, slug } },
+      where: { tenantId_slug: { tenantId: tenantId, slug } },
     })
   ) {
     n += 1
@@ -56,7 +61,7 @@ export async function POST(req: Request) {
       isPublished: data.isPublished ?? false,
       thumbnail:
         data.thumbnail && data.thumbnail.length > 0 ? data.thumbnail : null,
-      tenantId: user.tenantId,
+      tenantId,
       ownerId: user.id,
     },
   })

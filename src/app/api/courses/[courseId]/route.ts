@@ -10,6 +10,8 @@ import {
   requireSession,
   unauthorized,
 } from "@/lib/api-route"
+import { getEffectiveTenantIdForUser } from "@/lib/getTenant"
+import { isSuperAdmin } from "@/lib/permissions"
 import { slugify } from "@/lib/slugify"
 
 export async function PATCH(
@@ -18,7 +20,11 @@ export async function PATCH(
 ) {
   const session = await auth()
   const user = requireSession(session)
-  if (!user?.tenantId) {
+  if (!user) {
+    return unauthorized()
+  }
+  const tenantId = await getEffectiveTenantIdForUser(user)
+  if (!tenantId && !isSuperAdmin(user.role)) {
     return unauthorized()
   }
   if (!assertCanManage(user)) {
@@ -26,7 +32,9 @@ export async function PATCH(
   }
 
   const { courseId } = await ctx.params
-  const course = await assertCourseInTenant(courseId, user.tenantId)
+  const course = isSuperAdmin(user.role)
+    ? await prisma.course.findUnique({ where: { id: courseId } })
+    : await assertCourseInTenant(courseId, tenantId!)
   if (!course) {
     return NextResponse.json({ error: "Ruta no encontrada" }, { status: 404 })
   }
@@ -54,7 +62,7 @@ export async function PATCH(
   if (slug !== course.slug) {
     const clash = await prisma.course.findFirst({
       where: {
-        tenantId: user.tenantId,
+        tenantId: course.tenantId,
         slug,
         NOT: { id: course.id },
       },

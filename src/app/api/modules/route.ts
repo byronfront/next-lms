@@ -10,11 +10,13 @@ import {
   requireSession,
   unauthorized,
 } from "@/lib/api-route"
+import { getEffectiveTenantIdForUser } from "@/lib/getTenant"
+import { isSuperAdmin } from "@/lib/permissions"
 
 export async function POST(req: Request) {
   const session = await auth()
   const user = requireSession(session)
-  if (!user?.tenantId) {
+  if (!user) {
     return unauthorized()
   }
   if (!assertCanManage(user)) {
@@ -34,7 +36,12 @@ export async function POST(req: Request) {
   }
 
   const { courseId, title } = parsed.data
-  const course = await assertCourseInTenant(courseId, user.tenantId)
+  const tenantId = await getEffectiveTenantIdForUser(user)
+  const course = isSuperAdmin(user.role)
+    ? await prisma.course.findUnique({ where: { id: courseId } })
+    : tenantId
+      ? await assertCourseInTenant(courseId, tenantId)
+      : null
   if (!course) {
     return NextResponse.json({ error: "Ruta no encontrada" }, { status: 404 })
   }

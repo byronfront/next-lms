@@ -39,7 +39,8 @@ export default function SignInPage() {
       })
 
       if (result?.ok === true) {
-        window.location.assign(result.url ?? afterLogin)
+        // No usar result.url: Auth.js a veces devuelve solo el origin (/) y acabas en la portada.
+        window.location.assign(afterLogin)
         return
       }
 

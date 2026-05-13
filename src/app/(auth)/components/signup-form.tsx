@@ -33,7 +33,7 @@ export function SignUpForm() {
       await signIn("credentials", {
         email,
         password,
-        callbackUrl: "/dashboard",
+        callbackUrl: `${window.location.origin}/dashboard`,
       })
     } catch (e) {
       setError(e instanceof Error ? e.message : "Algo salió mal")

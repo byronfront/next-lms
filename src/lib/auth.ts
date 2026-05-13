@@ -96,6 +96,30 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
+    /** Misma lógica que Auth.js por defecto, más coincidencia con AUTH_URL (Vercel / dominio custom). */
+    redirect({ url, baseUrl }) {
+      if (url.startsWith("/")) {
+        return `${baseUrl}${url}`
+      }
+      try {
+        const target = new URL(url)
+        const base = new URL(baseUrl)
+        if (target.origin === base.origin) {
+          return url
+        }
+        const authBase = process.env.AUTH_URL
+        if (authBase) {
+          const configured = new URL(authBase)
+          if (target.origin === configured.origin) {
+            return url
+          }
+        }
+      } catch {
+        /* url inválida */
+      }
+      return baseUrl
+    },
+
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id

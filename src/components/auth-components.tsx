@@ -1,6 +1,7 @@
 "use client";
-import { signIn, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+import { signOutAndRedirectHome } from "@/actions/auth-actions";
 
 export function SignInWithProvider({ provider }: { provider: string }) {
   return (
@@ -23,8 +24,8 @@ export function SignIn() {
 
 export function SignOut() {
   return (
-    <Button onClick={() => signOut()}>
-      Cerrar sesión
-    </Button>
+    <form action={signOutAndRedirectHome}>
+      <Button type="submit">Cerrar sesión</Button>
+    </form>
   );
 }

@@ -1,10 +1,11 @@
 "use client"
 
-import { signOut, useSession } from "next-auth/react"
+import { useSession } from "next-auth/react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { User, Bell } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { signOutAndRedirectHome } from "@/actions/auth-actions"
 
 export function Topbar() {
   const { data: session } = useSession()
@@ -31,16 +32,11 @@ export function Topbar() {
           </span>
         </div>
 
-        <Button
-          variant="outline"
-          onClick={() =>
-            signOut({
-              callbackUrl: "/",
-            })
-          }
-        >
-          Cerrar sesión
-        </Button>
+        <form action={signOutAndRedirectHome}>
+          <Button type="submit" variant="outline">
+            Cerrar sesión
+          </Button>
+        </form>
 
       </div>
 

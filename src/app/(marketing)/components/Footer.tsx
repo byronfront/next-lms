@@ -15,10 +15,10 @@ export function Footer() {
 
         <div className="flex flex-col gap-2">
           <span className="font-medium">Producto</span>
-          <Link href="#features" className="text-muted-foreground hover:text-foreground">
+          <Link href="/ofrecemos" className="text-muted-foreground hover:text-foreground">
             Qué ofrecemos
           </Link>
-          <Link href="#pricing" className="text-muted-foreground hover:text-foreground">
+          <Link href="/planes" className="text-muted-foreground hover:text-foreground">
             Planes
           </Link>
         </div>

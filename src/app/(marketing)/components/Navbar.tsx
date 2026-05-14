@@ -18,10 +18,10 @@ export function Navbar() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
-          <Link href="#features" className="hover:text-foreground transition">
-            Contenido
+          <Link href="/ofrecemos" className="hover:text-foreground transition">
+            Qué ofrecemos
           </Link>
-          <Link href="#pricing" className="hover:text-foreground transition">
+          <Link href="/planes" className="hover:text-foreground transition">
             Planes
           </Link>
         </nav>

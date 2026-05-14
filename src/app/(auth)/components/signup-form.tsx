@@ -19,7 +19,11 @@ export function SignUpForm() {
     try {
       const res = await fetch("/api/register", {
         method: "POST",
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({
+          name: name.trim() || undefined,
+          email: email.trim(),
+          password,
+        }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -30,11 +34,25 @@ export function SignUpForm() {
         throw new Error(data.error ?? "No se pudo crear la cuenta")
       }
 
-      await signIn("credentials", {
-        email,
+      const afterSignup = `${window.location.origin}/dashboard`
+
+      const result = await signIn("credentials", {
+        email: email.trim(),
         password,
-        callbackUrl: `${window.location.origin}/dashboard`,
+        callbackUrl: afterSignup,
+        redirect: false,
       })
+
+      if (result?.ok === true) {
+        window.location.assign(afterSignup)
+        return
+      }
+
+      throw new Error(
+        result?.error === "CredentialsSignin"
+          ? "La cuenta se creó pero no pudimos iniciar sesión. Intenta entrar desde «Iniciar sesión»."
+          : "La cuenta se creó pero el inicio automático falló. Usa «Iniciar sesión»."
+      )
     } catch (e) {
       setError(e instanceof Error ? e.message : "Algo salió mal")
     } finally {

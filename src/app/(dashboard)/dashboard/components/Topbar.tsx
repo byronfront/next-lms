@@ -3,9 +3,10 @@
 import { useSession } from "next-auth/react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { User, Bell } from "lucide-react"
+import { User } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { signOutAndRedirectHome } from "@/actions/auth-actions"
+import { NotificationsPopover } from "./NotificationsPopover"
 
 export function Topbar() {
   const { data: session } = useSession()
@@ -21,9 +22,7 @@ export function Topbar() {
 
         <ThemeToggle />
 
-        <Button variant="ghost">
-          <Bell className="h-5 w-5" />
-        </Button>
+        <NotificationsPopover />
 
         <div className="flex items-center gap-2 text-sm">
           <User className="h-5 w-5" />
